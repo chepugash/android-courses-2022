@@ -5,14 +5,14 @@
 local.properties
 
 # generated files
-bin/
-gen/
-out/
-gen-external-apklibs/
+bin/**
+gen/**
+out/**
+gen-external-apklibs/**
 
 # Gradle generated files
 .gradle/
-build/
+build/**
 
 # Signing files
 .signing/
@@ -22,5 +22,6 @@ build/
 *.iml
 *.ipr
 *.iws
-classes/
+classes/**
 target/**
+/gradle.properties

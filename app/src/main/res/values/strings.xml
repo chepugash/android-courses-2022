@@ -9,4 +9,6 @@
     <string name="followings">followings</string>
     <string name="description">Dwayne Johnson \nfounder</string>
     <string name="edit">Edit</string>
+    <string name="actuals">Highlights</string>
+    <string name="new_actuals">New</string>
 </resources>

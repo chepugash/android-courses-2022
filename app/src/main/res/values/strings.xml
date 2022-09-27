@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">AndroidCourses2022</string>
-    <string name="nickname">therock</string>
-    <string name="publications_counter">3</string>
+    <string name="nickname"><b>therock</b></string>
+    <string name="publications_counter"><b>3</b></string>
     <string name="publications">Posts</string>
-    <string name="followers_counter">181k</string>
+    <string name="followers_counter"><b>338m</b></string>
     <string name="followers">followers</string>
-    <string name="followings_counter">5229</string>
+    <string name="followings_counter"><b>603</b></string>
     <string name="followings">followings</string>
-    <string name="description">Dwayne Johnson \nfounder</string>
+    <string name="description"><b>Dwayne Johnson</b> \nfounder</string>
     <string name="edit">Edit</string>
     <string name="actuals">Highlights</string>
     <string name="new_actuals">New</string>

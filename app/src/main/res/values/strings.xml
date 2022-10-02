@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidCourses2022</string>
+    <string name="call">Позвонить</string>
+    <string name="web_site">Веб-сайт</string>
+    <string name="share">Поделиться контактами</string>
+    <string name="kpfu">Приемная комиссия КФУ</string>
 </resources>

@@ -1,14 +1,15 @@
 package com.example.androidcourses2022
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.androidcourses2022.databinding.FragmentStartBinding
 
 class StartFragment : Fragment(R.layout.fragment_start) {
 
     private var binding: FragmentStartBinding? = null
-
     private var counter = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,6 +33,10 @@ class StartFragment : Fragment(R.layout.fragment_start) {
 
             btnSecond.setOnClickListener {
                 counter++
+            }
+
+            btnThird.setOnClickListener {
+                DialogFragment().show(parentFragmentManager, "TAG")
             }
         }
 

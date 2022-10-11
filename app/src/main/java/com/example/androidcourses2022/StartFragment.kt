@@ -1,10 +1,11 @@
 package com.example.androidcourses2022
 
-import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.androidcourses2022.databinding.FragmentStartBinding
 
 class StartFragment : Fragment(R.layout.fragment_start) {
@@ -36,15 +37,43 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             }
 
             btnThird.setOnClickListener {
-                DialogFragment().show(parentFragmentManager, "TAG")
+//                val mView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog, null, false)
+//                showD(mView)
+                DialogFragmentFragment.newInstance(parentFragmentManager)
+                val bundle = intent
+
+// performing the safety null check
+                var s:String? = null
+
+// getting the string back
+                s = bundle!!.getString("key1", "Default"))
+
             }
         }
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        println(arguments?.getInt("num").toString())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun showD(mView: View) {
+        showDialog(
+            title = "Input Number",
+            view = mView,
+            positiveAction = {
+
+            },
+            negativeAction = {},
+            neutralAction = {},
+        )
     }
 
 }

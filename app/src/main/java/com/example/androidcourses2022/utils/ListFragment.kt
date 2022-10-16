@@ -10,6 +10,10 @@ import com.example.androidcourses2022.adapter.PlayerAdapter
 import com.example.androidcourses2022.adapter.SpaceItemDecorator
 import com.example.androidcourses2022.databinding.FragmentListBinding
 import com.example.androidcourses2022.model.PlayerRepository
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     private var binding: FragmentListBinding? = null
@@ -39,7 +43,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                     .addToBackStack("list")
                     .commit()
             }
-            rvPlayer.adapter = adapter
+            rvPlayer.adapter = SlideInBottomAnimationAdapter(adapter!!)
             rvPlayer.addItemDecoration(itemDecoration)
         }
     }

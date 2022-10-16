@@ -22,7 +22,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="center|bottom"
             app:collapsedTitleTextColor="@color/white"
-            app:expandedTitleTextColor="@color/white"
+            app:expandedTitleTextColor="@color/invisible"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed" >
 
             <ImageView

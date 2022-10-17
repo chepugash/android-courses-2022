@@ -18,7 +18,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         binding = FragmentStartBinding.bind(view)
 
         binding?.run {
-
+            tvCounter.text = "Counter value: $counter"
             btnFirst.setOnClickListener {
                 parentFragmentManager.beginTransaction()
                     .setCustomAnimations(
@@ -34,46 +34,29 @@ class StartFragment : Fragment(R.layout.fragment_start) {
 
             btnSecond.setOnClickListener {
                 counter++
+                tvCounter.text = "Counter value: $counter"
             }
 
             btnThird.setOnClickListener {
-//                val mView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog, null, false)
-//                showD(mView)
-                DialogFragmentFragment.newInstance(parentFragmentManager)
-                val bundle = intent
-
-// performing the safety null check
-                var s:String? = null
-
-// getting the string back
-                s = bundle!!.getString("key1", "Default"))
-
+                val dialog = AlertFragment { num ->
+                    counter += num
+                    if (counter < 0) counter = 0
+                    tvCounter.text = "Counter value: $counter"
+                }
+                dialog.show(parentFragmentManager, "Tag")
             }
         }
 
     }
 
+    companion object {
+        private const val ARG_NAME = "num"
 
-    override fun onResume() {
-        super.onResume()
-        println(arguments?.getInt("num").toString())
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-    private fun showD(mView: View) {
-        showDialog(
-            title = "Input Number",
-            view = mView,
-            positiveAction = {
-
-            },
-            negativeAction = {},
-            neutralAction = {},
-        )
+        fun newInstance(num: Int) = StartFragment().apply {
+            arguments = Bundle().apply {
+                putInt(ARG_NAME, num)
+            }
+        }
     }
 
 }

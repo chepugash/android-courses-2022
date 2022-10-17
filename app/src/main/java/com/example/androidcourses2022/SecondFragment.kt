@@ -15,7 +15,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSecondBinding.bind(view)
 
-        val counter =arguments?.getInt(ARG_NAME)
+        val counter = arguments?.getInt(ARG_NAME)
 
         binding?.run {
             tvCounter?.text = "Counter value: $counter"

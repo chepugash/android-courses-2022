@@ -13,8 +13,14 @@ class StartFragment : Fragment(R.layout.fragment_start) {
     private var binding: FragmentStartBinding? = null
     private var counter = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentStartBinding.bind(view)
 
         binding?.run {
@@ -49,14 +55,9 @@ class StartFragment : Fragment(R.layout.fragment_start) {
 
     }
 
-    companion object {
-        private const val ARG_NAME = "num"
-
-        fun newInstance(num: Int) = StartFragment().apply {
-            arguments = Bundle().apply {
-                putInt(ARG_NAME, num)
-            }
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }

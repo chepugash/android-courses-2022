@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:focusable="true"
-    android:clickable="true"
+    android:clickable="false"
     android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
@@ -16,15 +16,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_del"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_del"
+        android:padding="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/tv_position"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_del"
         app:layout_constraintStart_toEndOf="@id/iv_pic"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -36,7 +48,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_name"
         app:layout_constraintStart_toStartOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="goalkeeper" />

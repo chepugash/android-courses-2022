@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AndroidCourses2022</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="position">Позиция в списке</string>
+    <string name="description">Позиция игрока</string>
+    <string name="title">Имя игрока</string>
 </resources>

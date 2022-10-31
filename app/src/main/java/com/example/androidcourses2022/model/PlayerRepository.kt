@@ -197,16 +197,51 @@ object PlayerRepository {
             pic = "https://i.bundesliga.com/player/dfl-obj-002gcr-dfl-clu-00000g-dfl-sea-0001k6.png")
     )
 
+    val adverts = mutableListOf(
+        MainItems.Advert(
+            "Waiting for you on our stadium!",
+            "https://img.fcbayern.com/image/upload/v1601458426/cms/public/images/allianz-arena/stadion-innenraum/aa_haupttribuene.jpg"
+        ),
+        MainItems.Advert(
+            "Visit our merch store on fcbayern.com/store",
+            "https://img.fcbayern.com/image/upload/t_cms-16x9/f_auto/w_660,h_371,c_fill/v1659079643/cms/public/images/allianz-arena/arena-innenbilder/Store3.jpg"
+        ),
+        MainItems.Advert(
+            "Online-museum of FC Bayern on fcbayern.com/museum",
+            "https://img.fcbayern.com/image/upload/t_cms-16x9/f_auto/w_1366,h_768,c_fill/cms/public/images/museum/schalen_erlebniswelt.jpg"
+        ),
+        MainItems.Advert(
+            "Support FC Bayern in Champions League",
+            "https://wwwimage-us.pplusstatic.com/thumbnails/photos/w1920-q80/marquee/1038640/ucl_sp_hero_landscape_0.jpg"
+        )
+    )
+
     val mainItems = mutableListOf<MainItems>().apply {
+        add(adverts[adverts.indices.random()].copy())
         var i: Int = 0
         var checker: Int = 0
         while (i < players.size) {
-            if (i != 0 && i % 5 == 0 && i != checker) {
-                add(MainItems.Advert("", ""))
+            if (i % 5 == 0 && i != checker) {
+                add(adverts[adverts.indices.random()].copy())
                 checker = i
             } else {
-                add(players[i])
+                add(players[i].copy())
                 i++
+            }
+        }
+    }
+
+    fun deleteElem(pos: Int) {
+        mainItems.removeAt(pos)
+        for (i in pos until mainItems.size - 1) {
+            if (mainItems[i] is MainItems.Advert
+                && i % 6 != 0) {
+                mainItems[i] = mainItems[i + 1].also {
+                    mainItems[i + 1] = mainItems[i]
+                }
+            }
+            if (mainItems[mainItems.size - 1] is MainItems.Advert) {
+                mainItems.removeAt(mainItems.size - 1)
             }
         }
     }

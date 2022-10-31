@@ -31,7 +31,7 @@ class PlayerListAdapter(
         viewType: Int
     ): RecyclerView.ViewHolder = when (viewType) {
         R.layout.item_player -> PlayerItem.create(parent, glide, action)
-        R.layout.item_advert -> AdvertItem.create(parent)
+        R.layout.item_advert -> AdvertItem.create(parent, glide)
         else -> throw IllegalStateException("Unexpected item")
     }
 
@@ -41,7 +41,7 @@ class PlayerListAdapter(
     ) {
         when (holder) {
             is PlayerItem -> holder.onBind(getItem(position) as MainItems.Player)
-            is AdvertItem -> holder.onBind("Visit our store")
+            is AdvertItem -> holder.onBind(getItem(position) as MainItems.Advert)
         }
     }
 

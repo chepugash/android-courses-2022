@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="profile">#B2EBF2</color>
+    <color name="settings">#FFF9C4</color>
+    <color name="home">#C8E6C9</color>
+    <color name="chat">#FFCCBC</color>
+    <color name="games">#D1C4E9</color>
+    <color name="music">#E0F2F1</color>
+    <color name="photos">#FCE4EC</color>
+    <color name="videos">#FFF8E1</color>
+    <color name="search">#FBE9E7</color>
 </resources>

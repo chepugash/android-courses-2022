@@ -7,12 +7,50 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="00:00" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time"
+        tools:text="пн, 01 ноября" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_stop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toBottomOf="@id/btn_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_start"
+        app:layout_constraintTop_toTopOf="@id/btn_start" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

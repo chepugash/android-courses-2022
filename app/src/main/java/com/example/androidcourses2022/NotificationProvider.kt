@@ -16,7 +16,7 @@ class NotificationProvider(private val context: MainActivity) {
     fun showNotification(title: String, text: String) {
         val notificationManager:NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, WakeupActivity::class.java)
         val pending = PendingIntent.getActivity(
             context,
             100,

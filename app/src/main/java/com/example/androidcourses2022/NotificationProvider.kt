@@ -1,5 +1,4 @@
 package com.example.androidcourses2022
-
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,7 +9,7 @@ import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 
-class NotificationProvider(private val context: MainActivity) {
+class NotificationProvider(private val context: Context) {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     fun showNotification(title: String, text: String) {

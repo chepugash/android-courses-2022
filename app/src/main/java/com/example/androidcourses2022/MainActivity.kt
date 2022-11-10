@@ -7,13 +7,20 @@ import android.os.Bundle
 import com.example.androidcourses2022.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.util.Log
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private var notificationProvider: NotificationProvider? = null
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pending: PendingIntent
 
-    private val time = Calendar.getInstance()
+    private val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,20 +30,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding?.run {
-            tvTime.text = SimpleDateFormat("HH:mm").format(time.time)
-            tvDate.text = SimpleDateFormat("EE, dd MMMM").format(time.time)
+            tvTime.text = SimpleDateFormat("HH:mm").format(calendar.time)
+            tvDate.text = SimpleDateFormat("EE, dd MMMM").format(calendar.time)
             tvTime.setOnClickListener {
                 val timeSetListener = TimePickerDialog
                     .OnTimeSetListener { timePicker, hour, minute ->
-                        time.set(Calendar.HOUR_OF_DAY, hour)
-                        time.set(Calendar.MINUTE, minute)
-                        tvTime.text = SimpleDateFormat("HH:mm").format(time.time)
+                        calendar.set(Calendar.HOUR_OF_DAY, hour)
+                        calendar.set(Calendar.MINUTE, minute)
+                        calendar.set(Calendar.SECOND, 0)
+                        calendar.set(Calendar.MILLISECOND, 0)
+                        tvTime.text = SimpleDateFormat("HH:mm").format(calendar.time)
                     }
                 TimePickerDialog(
                     this@MainActivity,
                     timeSetListener,
-                    time.get(Calendar.HOUR_OF_DAY),
-                    time.get(Calendar.MINUTE),
+                    calendar.get(Calendar.HOUR_OF_DAY),
+                    calendar.get(Calendar.MINUTE),
                     true
                 ).show()
             }
@@ -44,31 +53,28 @@ class MainActivity : AppCompatActivity() {
             tvDate.setOnClickListener {
                 val dateSetListener = DatePickerDialog
                     .OnDateSetListener { datePicker, year, month, dayOfMonth ->
-                        time.set(Calendar.YEAR, year)
-                        time.set(Calendar.MONTH, month)
-                        time.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                        tvDate.text = SimpleDateFormat("EE, dd MMMM").format(time.time)
+                        calendar.set(Calendar.YEAR, year)
+                        calendar.set(Calendar.MONTH, month)
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        tvDate.text = SimpleDateFormat("EE, dd MMMM").format(calendar.time)
                     }
                 DatePickerDialog(
                     this@MainActivity,
                     dateSetListener,
-                    time.get(Calendar.YEAR),
-                    time.get(Calendar.MONTH),
-                    time.get(Calendar.DAY_OF_MONTH)
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
 
             btnStart.setOnClickListener {
-                notificationProvider = NotificationProvider(this@MainActivity)
-                notificationProvider?.showNotification(
-                    title = "Проснись",
-                    text = "Тебе к первой паре..."
-                )
-
+                setAlarm()
+                ivAlarmFlag.setImageResource(R.drawable.ic_baseline_alarm_on_24)
             }
 
             btnStop.setOnClickListener {
-                TODO()
+                cancelAlarm()
+                ivAlarmFlag.setImageResource(R.drawable.ic_baseline_alarm_off_24)
             }
         }
 
@@ -77,6 +83,26 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         notificationProvider = null
+    }
+
+    private fun setAlarm() {
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReciever::class.java)
+        pending = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager.set(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            pending
+        )
+        Toast.makeText(this, "Alarm set", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun cancelAlarm() {
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReciever::class.java)
+        pending = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager.cancel(pending)
+        Toast.makeText(this, "Alarm canceled", Toast.LENGTH_SHORT).show()
     }
 
 }

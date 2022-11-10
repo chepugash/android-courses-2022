@@ -6,12 +6,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.media.AudioAttributes
+import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 
 class NotificationProvider(private val context: Context) {
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+//    @SuppressLint("UseCompatLoadingForDrawables")
     fun showNotification(title: String, text: String) {
         val notificationManager:NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -22,6 +24,16 @@ class NotificationProvider(private val context: Context) {
             intent,
             PendingIntent.FLAG_ONE_SHOT,
         )
+
+        val vibrations = arrayOf(1000L, 1000L, 1000L, 1000L, 1000L).toLongArray()
+        val audioAttributes: AudioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+            .build()
+        val sound: Uri = Uri.parse(
+            "android.resource://" + context.packageName + "/" + R.raw.alarm
+        )
+        val color = Color.GREEN
 
         val builder: NotificationCompat.Builder =
             NotificationCompat.Builder(
@@ -37,18 +49,18 @@ class NotificationProvider(private val context: Context) {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel(
-                context.getString(R.string.default_notification_channel_id),
-                context.getString(R.string.default_notification_channel_name),
-                NotificationManager.IMPORTANCE_HIGH
-            ).apply {
-                lightColor = Color.GREEN
-                setShowBadge(true)
-            }.also {
-                notificationManager.createNotificationChannel(it)
-            }
+            AlarmChanel(
+                context,
+                notificationManager,
+                vibrations,
+                audioAttributes,
+                sound,
+                color
+            )
         } else {
-            builder.setLights(Color.GREEN, 100, 500)
+            builder.setLights(color, 100, 500)
+            builder.setVibrate(vibrations)
+            builder.setSound(sound)
         }
 
         notificationManager.notify(1111, builder.build())

@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                     calendar.get(Calendar.MINUTE),
                     true
                 ).show()
+                ivAlarmFlag.setImageResource(R.drawable.ic_baseline_access_alarms_24)
             }
 
             tvDate.setOnClickListener {
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
+                ivAlarmFlag.setImageResource(R.drawable.ic_baseline_access_alarms_24)
             }
 
             btnStart.setOnClickListener {

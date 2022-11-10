@@ -3,6 +3,6 @@
     <string name="wakeup">Вы проснулись</string>
     <string name="start">Старт</string>
     <string name="stop">Стоп</string>
-    <string name="default_notification_channel_id" translatable="false">default</string>
+    <string name="default_notification_channel_id" translatable="false">my alarm</string>
     <string name="default_notification_channel_name">some name</string>
 </resources>
